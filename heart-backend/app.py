@@ -32,7 +32,7 @@ else:
     users_collection = None
 
 # Load environment variables or set defaults
-MODEL_PATH = os.getenv('MODEL_PATH', r'C:\Users\Hemalatha P\Desktop\DL\heart-backend\models\heart_xgb_pipeline.joblib')
+MODEL_PATH = os.getenv('MODEL_PATH', r'C:\Users\Hemalatha P\Desktop\projects\DL\heart-backend\models\heart.pkl')
 ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS', 'http://localhost:3000,http://192.168.31.137:3000,https://*.vercel.app').split(',')
 PORT = int(os.getenv('PORT', 5000))
 
@@ -53,6 +53,9 @@ def home():
 @app.route('/register', methods=['POST'])
 def register():
     try:
+        if users_collection is None:
+            return jsonify({"error": "Database not connected"}), 500
+
         data = request.get_json()
         username = data.get('username')
         password = data.get('password')
