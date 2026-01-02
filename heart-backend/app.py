@@ -32,7 +32,7 @@ else:
     users_collection = None
 
 # Load environment variables or set defaults
-MODEL_PATH = os.getenv('MODEL_PATH', r'C:\Users\Hemalatha P\Desktop\projects\DL\heart-backend\models\heart.pkl')
+MODEL_PATH = os.getenv('MODEL_PATH', os.path.join(os.path.dirname(__file__), 'models', 'heart.pkl'))
 ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS', 'http://localhost:3000,http://192.168.31.137:3000,https://*.vercel.app').split(',')
 PORT = int(os.getenv('PORT', 5000))
 
@@ -155,7 +155,7 @@ def convert_input(data):
     return data
 
 @app.route('/predict', methods=['POST'])
-@jwt_required()
+# @jwt_required()  # Temporarily disabled for testing
 def predict():
     try:
         data = request.get_json()

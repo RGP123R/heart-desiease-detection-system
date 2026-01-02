@@ -11,7 +11,7 @@ from sklearn.metrics import classification_report, roc_auc_score
 from xgboost import XGBClassifier
 
 # === Load Dataset ===
-df = pd.read_csv(r"C:\Users\Hemalatha P\Desktop\DL\heart-backend\Data\heart.csv")
+df = pd.read_csv("Data/heart.csv")
 print(f"✅ Dataset loaded successfully: {df.shape}")
 print(df.head())
 
